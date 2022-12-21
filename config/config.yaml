@@ -1,0 +1,9 @@
+fileConfig:
+  name:     "Bookmarks.html"
+  path:     "ReadFromFile/" 
+
+
+mangaFolder:
+  tagName: "h3"
+  attributeKey: "ADD_DATE"
+  attributeValue: "1669610794"
