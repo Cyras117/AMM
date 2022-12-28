@@ -22,12 +22,15 @@ func GetAllTheMangasUrl() []string {
 		log.Println("rootNode is nil")
 		return nil
 	}
+
 	mangaFolderNode := SearchFirstNodeOccurrence(rootNode, searchConfig[configScope][configAttrKey],
 		searchConfig[configScope][configAttrValue], searchConfig[configScope][configTagName])
 
 	SearchNodeByAtrr(mangaFolderNode, "href", "https://", &readingNodes, "a")
+
 	for _, node := range readingNodes {
 		res = append(res, node.Attr[0].Val)
 	}
+
 	return res
 }

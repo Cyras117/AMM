@@ -6,34 +6,6 @@ import (
 	"golang.org/x/net/html"
 )
 
-func isIn(phrase string, str string) bool {
-
-	p := strings.ToLower(phrase)
-	s := strings.ToLower(str)
-
-	lPhr := len(phrase)
-	lStr := len(str)
-
-	if lStr < lPhr {
-		return false
-	}
-
-	for i := 0; i < lStr; i++ {
-		if p[0] == s[i] {
-			for j := i; j < lStr; j++ {
-				if s[j] == p[j-i] {
-					if j-i == lPhr-1 {
-						return true
-					}
-				} else {
-					break
-				}
-			}
-		}
-	}
-	return false
-}
-
 func checkMatch(node *html.Node, atrr, value, data string) bool {
 	if node.Attr == nil {
 		return false
@@ -47,7 +19,7 @@ func checkMatch(node *html.Node, atrr, value, data string) bool {
 		atr := strings.ToLower(atrr)
 		val := strings.ToLower(value)
 		if natrr == atr {
-			if isIn(val, nvalue) {
+			if IsIn(val, nvalue) {
 				return true
 			}
 		}
@@ -97,8 +69,8 @@ func SearchNodeByAtrr(node *html.Node, atrr string, value string, result *[]html
 func SearchFirstNodeOccurrence(node *html.Node, atrr string, value string, data string) *html.Node {
 	var result []html.Node
 	SearchNodeByAtrr(node, atrr, value, &result, data)
-	if result == nil {
-		return nil
+	if result != nil {
+		return &result[0]
 	}
-	return &result[0]
+	return nil
 }
